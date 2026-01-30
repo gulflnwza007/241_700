@@ -1,0 +1,141 @@
+/* นำเข้าฟอนต์ภาษาไทยจาก Google Fonts เพื่อความสวยงาม */
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
+
+/* ตั้งค่าพื้นฐาน */
+* {
+    box-sizing: border-box; /* ให้ Padding ไม่ไปเพิ่มขนาดของกล่อง */
+}
+
+body {
+    font-family: 'Sarabun', sans-serif;
+    background-color: #f4f4f9; /* สีพื้นหลังเว็บแบบเทาอ่อนสบายตา */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* กล่องคอนเทนเนอร์หลัก */
+.container {
+    background-color: white;
+    width: 100%;
+    max-width: 500px; /* จำกัดความกว้างไม่ให้เกิน 500px */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* เงาให้ดูมีมิติ */
+}
+
+/* ส่วนหัวแบบฟอร์ม */
+.header {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+
+/* คลาสจัด layout แบบ Flexbox */
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* ระยะห่างระหว่าง elements */
+}
+
+/* แถวของ Input แต่ละแถว */
+.form-input {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* ป้ายกำกับหน้าช่องกรอก (เช่น ชื่อ, นามสกุล) */
+.header-form {
+    min-width: 80px; /* กำหนดความกว้างขั้นต่ำเพื่อให้ Input ด้านหลังตรงกัน */
+    font-weight: bold;
+}
+
+/* ช่องกรอกข้อมูล (Text Input) */
+.form {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Sarabun', sans-serif;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form:focus {
+    border-color: #007bff; /* เปลี่ยนสีขอบเมื่อคลิกพิมพ์ */
+}
+
+/* จัดการส่วนเพศ (Radio Buttons) */
+.gender .flex > div {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+/* ส่วนงานอดิเรก (Checkbox) */
+.form-input div {
+    margin-top: 5px;
+}
+
+/* กล่องข้อความยาว (Textarea) */
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Sarabun', sans-serif;
+    resize: vertical; /* ย่อขยายได้แค่แนวตั้ง */
+}
+
+/* จัดปุ่มให้อยู่ตรงกลาง */
+.center {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ปุ่มส่งข้อมูล */
+.button {
+    background-color: #007bff; /* สีน้ำเงิน */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Sarabun', sans-serif;
+}
+
+.button:hover {
+    background-color: #0056b3; /* สีเข้มขึ้นเมื่อเอาเมาส์ชี้ */
+}
+
+/* Responsive: ปรับเป็นแนวตั้งเมื่อหน้าจอเล็กมาก (มือถือ) */
+@media (max-width: 400px) {
+    .flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .header-form {
+        margin-bottom: 5px;
+    }
+    
+    /* ยกเว้นส่วนเพศให้เรียงแนวนอนเหมือนเดิม */
+    .gender .flex {
+        flex-direction: row;
+    }
+}
