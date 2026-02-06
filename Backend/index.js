@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //ทำการ import โมดูล http
 const http = require('http');
 const host = 'localhost';
@@ -13,4 +14,21 @@ const reqestListener = function (req,res){
 const server = http.createServer(reqestListener)
 server.listen(port, host, () =>{
     console.log(`server is running on http://${host}:${port}`);
+=======
+//ทำการ import โมดูล http
+const http = require('http');
+const host = 'localhost';
+const port = 8000;
+
+//กำหนดค่า server
+
+const reqestListener = function (req,res){
+    res.writeHead(200);
+    res.end('Hello, World! This is my first server.');
+}
+//run server
+const server = http.createServer(reqestListener)
+server.listen(port, host, () =>{
+    console.log(`server is running on http://${host}:${port}`);
+>>>>>>> db8d66b79b0e516d5dd752f46f2e7a477c848662
 })
