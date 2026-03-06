@@ -1,5 +1,5 @@
 
-function submitData () {
+const submitData = async () => {
     let firstNameDOM = document.querySelector('input[name=firstname]');
     let lastNameDOM = document.querySelector('input[name=lastname]');
     let ageDOM = document.querySelector('input[name=age]');
@@ -21,7 +21,9 @@ function submitData () {
         age: ageDOM.value,
         gender: genderDOM.value,
         description: descriptionDOM.value,
-        interest: interest
+        interests: interest
     }
-     console.log('submitData', userData);
+    console.log('submitData', userData);
+    const response = axios.post('http://localhost:8000/users', userData);
+    console.log('response', response); 
 }
