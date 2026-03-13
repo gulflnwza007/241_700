@@ -49,13 +49,13 @@ const submitData = async () => {
     }
     console.log('submitData', userData);
 
-    const errors = validateDate(userData);
-    if (errors.length > 0) {
-        throw {
-            message: 'กรอกข้อมูลไม่ครบถ้วน',
-            errors: errors
-        }
-    }
+//    const errors = validateDate(userData);
+//    if (errors.length > 0) {
+//        throw {
+//            message: 'กรอกข้อมูลไม่ครบถ้วน',
+//            errors: errors
+//        }
+//    }
         const response = axios.post('http://localhost:8000/users', userData);
         console.log('response', response);
         messageDOM.innerText = 'บันทึกข้อมูลสำเร็จ';
@@ -69,9 +69,10 @@ const submitData = async () => {
         for (let i = 0; i < error.errors.length; i++) {
             htmlData += `<li> ${error.errors[i]} </li>`;
         }
-        //if (error.response) {
-        //console.error('Error response:', error.response.data.message);
-        //}
+        if (error.response) {
+        console.error('Error response:', error.response);
+        error.errors = error.response.data.errors
+        }
         htmlData += '</ul>';
         htmlData += '</div>';
         messageDOM.innerHTML = htmlData;
