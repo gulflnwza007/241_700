@@ -25,21 +25,57 @@ app.get('/users', async (req, res)=>{
     const results = await conn.query('SELECT * FROM users');
     res.json(results[0]);
 })
+const validateDate =  (userData) => {
+    let error=[];
+    if (!userData.firstName) {
+        error.push('กรุณากรอกชื่อ');
+    }
+    if (!userData.lastName) {
+        error.push('กรุณากรอกนามสกุล');
+    }
+    if (!userData.age) {
+        error.push('กรุณากรอกอายุ');
+    }
+    if (!userData.gender) {
+        error.push('กรุณาเลือกเพศ');
+    }
+    if (!userData.interests) {
+        error.push('กรุณาเลือกงานอดิเรก');
+    }
+    if (!userData.description) {
+        error.push('กรุณากรอกคำอธิบาย');
+    }
+    return error;
+}   
 //path: = POST /users สำหรับเพิ่ม user ใหม่
 app.post('/users', async (req, res)=>{
     try{
         let user = req.body;
-        const results = await conn.query('INSERT INTO users SET ?',user);
-        console.log('results:',results)
+        const error = validateData(user);
+        if(error.length > 0){
+            throw { 
+                message:'กรุณากรอกข้อมูลให้ครบถ้วน', 
+                errors: errors
+            }
+        }
+        const results = await conn.query('INSERT INTO users SET ?', user);
+        console.log('results', results);
         res.json({
             message: 'User added successfully',
             data: results[0]
         });
     }catch(error){
-        console.error('Eror inserting user:',error);
-        res.status(500).json({message: 'Error adding user'});
-    }
-})
+        const errorMessage = error.message || 'Error adding user';
+        const errorDetails = error.errors || [];
+        console.error('Error inserting user:',error);
+        res.status(500).json({
+            message: errorMessage,
+            errors: errorDetails
+        });
+    }           
+        });
+
+
 //path: = GET /users/:id สำหรับดึงข้อมูล user ตาม id
 app.get('/users/:id',async(req,res)=>{
         try{
@@ -57,6 +93,7 @@ app.get('/users/:id',async(req,res)=>{
             })
         }
     })
+    
 
 app.put('/users/:id',async (req,res)=>{
     try{
